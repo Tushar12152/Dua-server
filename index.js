@@ -28,9 +28,21 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     // await client.connect();
 
+    const DuaCollections = client.db("Dua-Db").collection("Dua");
+    
 
 
+    app.post('/dua',async(req,res)=>{
+         const dua =req.body;
+        //  console.log(dua);
+        const result = await DuaCollections.insertOne(dua)
+        res.send(result)
+    })
  
+    app.get('/dua', async (req,res)=>{
+         const result=await DuaCollections.find().toArray()
+         res.send(result)
+    })
 
 
 
